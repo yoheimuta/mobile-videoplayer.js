@@ -1,0 +1,24 @@
+{
+  "name": "mobile-videoplayer",
+  "version": "0.0.1",
+  "description": "videoplayer for mobile browser, especially ios safari which is disabled to autoplay mp4",
+  "main": "npm build",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "matchdep": "~0.3.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-usemin": "~2.0.2",
+    "grunt-filerev": "~2.1.2",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-concat": "~0.3.0"
+  },
+  "scripts": {
+    "build": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://bitbucket.org:yoheimuta/mobile-videoplayer.js.git"
+  }
+}
