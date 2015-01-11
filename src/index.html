@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>mobile-videoplayer</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <script src="main.js"></script>
+</head>
+<body>
+  <!--表示コンテナ-->
+  <div id="video_container">
+      <div class="load-scene">
+          <img src="http://placehold.it/320x180">
+      </div>
+
+      <div
+          class="play-scene"
+          data-frame-width=320
+          data-frame-height=180
+          data-fps=10
+          style="display: none;"
+          >
+          <div
+              data-url="assets/f10_320x180_1.jpg"
+              class="strip"
+              data-frames-count=54
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/f10_320x180_2.jpg"
+              class="strip"
+              data-frames-count=54
+              style="display: none;"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/f10_320x180_3.jpg"
+              class="strip"
+              data-frames-count=44
+              style="display: none;"
+              >
+              <img>
+          </div>
+      </div>
+
+      <div class="replay-scene" style="display: none;">
+          <p>replay ?</p>
+      </div>
+
+      <div class="done-scene" style="display: none;">
+          <img src="http://placehold.it/320x180">
+      </div>
+  </div>
+  <!--スクリプトの実行-->
+  <script>
+    MVPlayer.Controller.run(document.getElementById("video_container"));
+  </script>
+</body>
+</html>
+
