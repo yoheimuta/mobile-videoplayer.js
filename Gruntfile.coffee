@@ -1,15 +1,42 @@
 "use strict"
 
+LIVERELOAD_PORT = 35729
+
+liveReload = require('connect-livereload')(port: LIVERELOAD_PORT)
+serveStatic = (connect, base) ->
+  connect.static (require("path").resolve base)
+
 module.exports = (grunt) ->
 
   grunt.initConfig
 
     ####
+    # static server
+    ####
+    connect:
+        options:
+            port: 9000
+            hostname: "localhost"
+        dev:
+            options:
+                middleware: (connect, options) ->
+                  [liveReload, serveStatic(connect, "src")]
+        dist:
+            options:
+                middleware: (connect, options) ->
+                  [liveReload, serveStatic(connect, "dist")]
+
+    ####
     # watch
     ####
     watch:
-        files: ["src/**/*.html", "src/**/*.js", "Gruntfile.coffee"]
-        tasks: ["build"]
+        options:
+            livereload: LIVERELOAD_PORT
+        dev:
+            files: ["src/**/*.html", "src/**/*.js", "Gruntfile.coffee"]
+        dist:
+            files: ["src/**/*.html", "src/**/*.js", "Gruntfile.coffee"]
+            tasks: ["build"]
 
     ####
     ## compile
@@ -51,9 +78,16 @@ module.exports = (grunt) ->
             dirs: ["dist/"]
         html: ["dist/**/*.html"]
 
-  grunt.registerTask "default", ["build", "watch"]
-
   grunt.registerTask "build", ["clean", "copy", "useminPrepare",
                               "concat", "uglify", "filerev", "usemin"]
+
+  grunt.registerTask "server", (target) ->
+
+    if (target != "dist")
+      return grunt.task.run ["connect:dev", "watch:dev"]
+    else
+      return grunt.task.run ["connect:dist", "watch:dist"]
+
+  grunt.registerTask "default", ["build", "server:dist"]
 
   require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks
