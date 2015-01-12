@@ -1,0 +1,11 @@
+{
+  "name": "mobile-videoplayer",
+  "version": "0.0.1",
+  "homepage": "https://bitbucket.org/yoheimuta/mobile-videoplayer.js",
+  "description": "videoplayer for mobile browser, especially ios safari which is disabled to autoplay mp4",
+  "devDependencies": {
+    "jasmine": "~2.0.0",
+    "jquery": "~2.1.0",
+    "jasmine-jquery": "~2.0.3"
+  }
+}

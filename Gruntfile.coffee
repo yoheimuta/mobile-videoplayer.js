@@ -33,10 +33,10 @@ module.exports = (grunt) ->
         options:
             livereload: LIVERELOAD_PORT
         dev:
-            files: ["src/**/*.html", "src/**/*.js", "Gruntfile.coffee", ".jshintrc"]
-            tasks: ["jshint"]
+            files: ["src/**/*.html", "src/**/*.js", "spec/**/*.js", "Gruntfile.coffee", ".jshintrc"]
+            tasks: ["jshint", "testem:ci:short"]
         dist:
-            files: ["src/**/*.html", "src/**/*.js", "Gruntfile.coffee", ".jshintrc"]
+            files: ["src/**/*.html", "src/**/*.js", "spec/**/*.js", "Gruntfile.coffee", ".jshintrc"]
             tasks: ["build"]
 
     ####
@@ -50,6 +50,36 @@ module.exports = (grunt) ->
         ]
         options:
             jshintrc: ".jshintrc"
+
+    ####
+    # test
+    ####
+    testem:
+        short:
+            src: [
+                "bower_components/jquery/dist/jquery.min.js"
+                "bower_components/jasmine-jquery/lib/jasmine-jquery.js"
+                "src/**/*.js"
+                "spec/**/*.js"
+            ]
+            options:
+                parallel: 8
+                framework: "jasmine2"
+                launch_in_ci: ["PhantomJS"]
+                launch_in_dev: ["PhantomJS"] # allow to use only: grunt testem:run:short
+        long:
+            src: [
+                "bower_components/jquery/dist/jquery.min.js"
+                "bower_components/jasmine-jquery/lib/jasmine-jquery.js"
+                "src/**/*.js"
+                "spec/**/*.js"
+            ]
+            options:
+                parallel: 8
+                framework: "jasmine2"
+                launch_in_ci: ["PhantomJS", "Chrome", "Firefox"]
+                launch_in_dev: ["PhantomJS", "Chrome", "Firefox", "Safari"] # allow to use only: grunt testem:run:long
+
 
     ####
     ## compile
@@ -91,15 +121,17 @@ module.exports = (grunt) ->
             dirs: ["dist/"]
         html: ["dist/**/*.html"]
 
-  grunt.registerTask "build", ["jshint", "clean", "copy", "useminPrepare",
+  grunt.registerTask "build", ["jshint", "testem:ci:short", "clean", "copy", "useminPrepare",
                               "concat", "uglify", "filerev", "usemin"]
 
   grunt.registerTask "server", (target) ->
 
     if (target != "dist")
-      return grunt.task.run ["jshint", "connect:dev", "watch:dev"]
+      return grunt.task.run ["jshint", "testem:ci:short", "connect:dev", "watch:dev"]
     else
       return grunt.task.run ["connect:dist", "watch:dist"]
+
+  grunt.registerTask "test", ["jshint", "testem:ci:long"]
 
   grunt.registerTask "default", ["build", "server:dist"]
 
