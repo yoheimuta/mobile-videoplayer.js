@@ -5,7 +5,7 @@ MVPlayer.Strip = (function() {
         this.width       = width;
         this.height      = height;
         this.image_url   = element.dataset.url;
-        this.frame_count = parseInt(element.dataset.framesCount, 10)
+        this.frame_count = parseInt(element.dataset.framesCount, 10);
         this.element     = element;
 
         this._initStyles();
@@ -15,7 +15,7 @@ MVPlayer.Strip = (function() {
 
     Strip.prototype._initStyles = function() {
         this.element.style.position = "absolute";
-    }
+    };
 
     Strip.prototype._initFrames = function() {
         this.frames = [];
@@ -24,13 +24,13 @@ MVPlayer.Strip = (function() {
             this.frames.push(frame);
         }
         this.frame_index = 0;
-    }
+    };
 
     Strip.prototype._initStripImages = function() {
         this.imageElement = this.element.getElementsByTagName("img")[0];
         this.imageElement.style.width  = this.width + "px";
         this.imageElement.style.height = (this.height * this.frame_count) + "px";
-    }
+    };
 
     Strip.prototype.activate = function() {
         this.element.style.display = "";

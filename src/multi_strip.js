@@ -55,17 +55,18 @@ MVPlayer.MultiStrip = (function() {
             callback("already");
             return;
         }
-
         this.strip_already_loading = true;
 
+        var that = this;
+        var strip_loaded_callback = function() {
+            that.strip_loaded_count++;
+            if (that.strip_loaded_count === that.strips.length) {
+                callback(null);
+            }
+        };
+
         for (var i = 0; i < this.strips.length; i++) {
-            var that = this;
-            this.strips[i].load(function() {
-                that.strip_loaded_count++;
-                if (that.strip_loaded_count === that.strips.length) {
-                    callback(null);
-                }
-            });
+            this.strips[i].load(strip_loaded_callback);
         }
     };
 

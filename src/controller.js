@@ -46,7 +46,7 @@ MVPlayer.Controller = (function() {
                 if (doneElement) {
                     doneElement.style.display = "";
                 }
-            }
+            };
         })(player.dispatcher.didFinish);
 
         if (replayElement) {
@@ -66,8 +66,8 @@ MVPlayer.Controller = (function() {
 
         var detector = new MVPlayer.AppearanceDetector(
             player.element, 90, 90,
-            function() { _play(player, loadElement) },
-            function() { _finish(player)}
+            function() { _play(player, loadElement); },
+            function() { _finish(player); }
         );
         document.addEventListener("scroll", function() {
             detector.detect();

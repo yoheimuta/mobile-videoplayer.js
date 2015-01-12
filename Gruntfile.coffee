@@ -33,10 +33,23 @@ module.exports = (grunt) ->
         options:
             livereload: LIVERELOAD_PORT
         dev:
-            files: ["src/**/*.html", "src/**/*.js", "Gruntfile.coffee"]
+            files: ["src/**/*.html", "src/**/*.js", "Gruntfile.coffee", ".jshintrc"]
+            tasks: ["jshint"]
         dist:
-            files: ["src/**/*.html", "src/**/*.js", "Gruntfile.coffee"]
+            files: ["src/**/*.html", "src/**/*.js", "Gruntfile.coffee", ".jshintrc"]
             tasks: ["build"]
+
+    ####
+    # jshint
+    ####
+    jshint:
+        files:[
+            "package.json"
+            ".jshintrc"
+            "src/**/*.js"
+        ]
+        options:
+            jshintrc: ".jshintrc"
 
     ####
     ## compile
@@ -78,13 +91,13 @@ module.exports = (grunt) ->
             dirs: ["dist/"]
         html: ["dist/**/*.html"]
 
-  grunt.registerTask "build", ["clean", "copy", "useminPrepare",
+  grunt.registerTask "build", ["jshint", "clean", "copy", "useminPrepare",
                               "concat", "uglify", "filerev", "usemin"]
 
   grunt.registerTask "server", (target) ->
 
     if (target != "dist")
-      return grunt.task.run ["connect:dev", "watch:dev"]
+      return grunt.task.run ["jshint", "connect:dev", "watch:dev"]
     else
       return grunt.task.run ["connect:dist", "watch:dist"]
 
