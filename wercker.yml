@@ -1,0 +1,52 @@
+box: wercker/ubuntu12.04-webessentials@1.0.4
+# Build definition
+build:
+  # The steps that will be executed on build
+  steps:
+
+    - script:
+        name: Print versions
+        code: |
+          sudo npm -v
+          sudo node -v
+
+    - script:
+        name: Install google chrome stable
+        code: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+    - script:
+        name: Install grunt and bower globally
+        code: |
+          sudo npm install -g grunt-cli
+          sudo npm install -g bower
+
+    - script:
+        name: Install node modules
+        code: |
+          sudo npm install
+
+    - script:
+        name: Install bower components
+        code: |
+          bower install
+
+    - script:
+        name: Print list available testem launchers
+        code: |
+          grunt testem:launchers
+
+    - script:
+        name: Test
+        code: |
+          sudo xvfb-run grunt test
+
+  after-steps:
+
+    # Slack integration
+    # see http://qiita.com/nekogeruge_987/items/f2c9bc1e258128d49373
+    - wantedly/pretty-slack-notify:
+        webhook_url: https://hooks.slack.com/services/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
