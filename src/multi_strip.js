@@ -81,6 +81,7 @@ MVPlayer.MultiStrip = (function() {
 
             current = this.strips[++this.strip_index];
             current.activate();
+            return;
         }
         current.move();
     };
