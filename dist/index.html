@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 
-  <script src="./mvplayer.min.148235ee.js"></script>
+  <script src="./mvplayer.min.faaad86f.js"></script>
 </head>
 <body>
   <!--表示コンテナ-->
@@ -57,7 +57,9 @@
   </div>
   <!--スクリプトの実行-->
   <script>
-    MVPlayer.Controller.run(document.getElementById("video_container"));
+    window.onload = function(){
+        MVPlayer.Controller.run(document.getElementById("video_container"));
+    };
   </script>
 </body>
 </html>

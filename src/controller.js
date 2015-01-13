@@ -28,7 +28,7 @@ MVPlayer.Controller = (function() {
         player.pause();
     }
 
-    function _setupEvents(player, loadElement, replayElement, doneElement) {
+    function _setupEvents(element, player, loadElement, replayElement, doneElement) {
         (function(didFinish) {
             player.dispatcher.didFinish = function() {
                 didFinish.call(player.dispatcher);
@@ -65,7 +65,7 @@ MVPlayer.Controller = (function() {
         }
 
         var detector = new MVPlayer.AppearanceDetector(
-            player.element, 90, 90,
+            element, 90, 90,
             function() { _play(player, loadElement); },
             function() { _finish(player); }
         );
@@ -86,7 +86,7 @@ MVPlayer.Controller = (function() {
         var replayElement = element.getElementsByClassName("replay-scene")[0];
         var doneElement   = element.getElementsByClassName("done-scene")[0];
 
-        _setupEvents(player, loadElement, replayElement, doneElement);
+        _setupEvents(element, player, loadElement, replayElement, doneElement);
     };
 
     return Controller;
