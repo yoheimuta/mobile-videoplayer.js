@@ -33,10 +33,10 @@ module.exports = (grunt) ->
         options:
             livereload: LIVERELOAD_PORT
         dev:
-            files: ["src/**/*.html", "src/**/*.js", "spec/**/*.js", "Gruntfile.coffee", ".jshintrc"]
+            files: ["src/**/*", "spec/**/*.js", "Gruntfile.coffee", ".jshintrc"]
             tasks: ["jshint", "testem:ci:short"]
         dist:
-            files: ["src/**/*.html", "src/**/*.js", "spec/**/*.js", "Gruntfile.coffee", ".jshintrc"]
+            files: ["src/**/*", "spec/**/*.js", "Gruntfile.coffee", ".jshintrc"]
             tasks: ["build"]
 
     ####
@@ -78,7 +78,7 @@ module.exports = (grunt) ->
                 parallel: 8
                 framework: "jasmine2"
                 launch_in_ci: ["PhantomJS", "Chrome", "Firefox"]
-                launch_in_dev: ["PhantomJS", "Chrome", "Firefox", "Safari"] # allow to use only: grunt testem:run:long
+                launch_in_dev: ["PhantomJS", "Chrome", "ChromeCanary", "Firefox", "Safari", "IE7", "IE8", "IE9"] # allow to use only: grunt testem:run:long
 
 
     ####
@@ -96,6 +96,7 @@ module.exports = (grunt) ->
                 src: [
                     "**/*.html"
                     "assets/**"
+                    "!assets/**/*.mp4"
                 ]
                 filter: "isFile"
             ]
