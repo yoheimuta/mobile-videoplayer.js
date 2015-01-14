@@ -3,13 +3,14 @@ var MVPlayer = window.MVPlayer = window.MVPlayer || {};
 MVPlayer.Controller = (function() {
     var Controller = {};
 
-    var is_appear  = false;
+    var _is_appear = false;
+    var _is_debug  = false;
 
     function _play(player, loadElement) {
-        is_appear = true;
+        _is_appear = true;
 
         player.load(function(err) {
-            if (!is_appear || err) {
+            if (!_is_appear || err) {
                 return;
             }
 
@@ -23,15 +24,15 @@ MVPlayer.Controller = (function() {
     }
 
     function _finish(player) {
-        is_appear = false;
+        _is_appear = false;
 
         player.pause();
     }
 
     function _setupEvents(element, player, loadElement, replayElement, doneElement) {
-        (function(didFinish) {
-            player.dispatcher.didFinish = function() {
-                didFinish.call(player.dispatcher);
+        (function(didComplete) {
+            player.dispatcher.didComplete = function() {
+                didComplete.call(player.dispatcher);
 
                 if (!replayElement && !doneElement) {
                     player.play();
@@ -47,7 +48,7 @@ MVPlayer.Controller = (function() {
                     doneElement.style.display = "";
                 }
             };
-        })(player.dispatcher.didFinish);
+        })(player.dispatcher.didComplete);
 
         if (replayElement) {
             replayElement.addEventListener("click", function() {
@@ -74,13 +75,15 @@ MVPlayer.Controller = (function() {
         });
     }
 
-    Controller.run = function(element) {
+    Controller.run = function(element, is_debug) {
+        _is_debug = is_debug;
+
         var playElement = element.getElementsByClassName("play-scene")[0];
         if (!playElement) {
             return;
         }
 
-        var player = new MVPlayer.Player(playElement);
+        var player = new MVPlayer.Player(playElement, _is_debug);
 
         var loadElement   = element.getElementsByClassName("load-scene")[0];
         var replayElement = element.getElementsByClassName("replay-scene")[0];

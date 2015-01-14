@@ -9,6 +9,7 @@ Note that `tamagotchi_4u.mp4` which is used to show this product demo is [CC BY]
 ### Usage
 
 Create the container tag.
+Set data-*-url to send fine-grained impression trackings following `VAST` format as close as possible.
 
 ```html
 <div id="video_container">
@@ -21,6 +22,13 @@ Create the container tag.
       data-frame-width=320
       data-frame-height=180
       data-fps=12
+      data-did-start-url=""
+      data-did-resume-url=""
+      data-did-complete-url=""
+      data-first-quartile-url=""
+      data-midpoint-url=""
+      data-third-quartile-url=""
+      data-did-pause-url=""
       style="display: none;"
       >
       <div
@@ -67,12 +75,13 @@ Create the container tag.
 ```
 
 Insert the script.
+Give the container element id as 1st arg and is_debug flag to console log as 2nd arg.
 
 ```html
 <script src="mvplayer.min.js"></script>
 <script>
 window.onload = function(){
-    MVPlayer.Controller.run(document.getElementById("video_container"));
+    MVPlayer.Controller.run(document.getElementById("video_container"), true);
 };
 </script>
 ```

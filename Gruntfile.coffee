@@ -33,10 +33,10 @@ module.exports = (grunt) ->
         options:
             livereload: LIVERELOAD_PORT
         dev:
-            files: ["src/**/*", "spec/**/*.js", "Gruntfile.coffee", ".jshintrc"]
+            files: ["src/**/*", "spec/**/*", "Gruntfile.coffee", ".jshintrc"]
             tasks: ["jshint", "testem:ci:short"]
         dist:
-            files: ["src/**/*", "spec/**/*.js", "Gruntfile.coffee", ".jshintrc"]
+            files: ["src/**/*", "spec/**/*", "Gruntfile.coffee", ".jshintrc"]
             tasks: ["build"]
 
     ####

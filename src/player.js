@@ -1,13 +1,14 @@
 var MVPlayer = window.MVPlayer = window.MVPlayer || {};
 
 MVPlayer.Player = (function() {
-    function Player(element) {
+    function Player(element, is_debug) {
         var d = element.dataset;
         var w = parseInt(d.frameWidth, 10);
         var h = parseInt(d.frameHeight, 10);
 
         this.movie = new MVPlayer.MultiStrip(w, h, element.getElementsByClassName("strip"));
-        this.dispatcher = new MVPlayer.PlayerEventDispatcher();
+        this.dispatcher = new MVPlayer.PlayerEventDispatcher(is_debug, d.didStartUrl, d.didResumeUrl,
+            d.didCompleteUrl, d.firstQuartileUrl, d.midpointUrl, d.thirdQuartileUrl, d.didPauseUrl);
 
         this.fps = parseInt(d.fps, 10);
 
@@ -41,7 +42,7 @@ MVPlayer.Player = (function() {
                     that.pause();
                     that.movie.reset();
 
-                    that.dispatcher.didFinish();
+                    that.dispatcher.didComplete();
                 } else {
                     that.movie.show();
                     that.movie.move();
@@ -52,7 +53,7 @@ MVPlayer.Player = (function() {
                         that.dispatcher.firstQuartile();
                     }
                     if (current === Math.floor(total / 2)) {
-                        that.dispatcher.half();
+                        that.dispatcher.midpoint();
                     }
                     if (current === Math.floor(total / 4 * 3)) {
                         that.dispatcher.thirdQuartile();

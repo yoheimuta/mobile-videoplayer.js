@@ -14,6 +14,14 @@ describe("player", function() {
         expect(player.element.style.height).toEqual("180px");
         expect(player.element.style.position).toEqual("relative");
         expect(player.element.style.overflow).toEqual("hidden");
+
+        expect(player.dispatcher.did_start_url).toEqual("start");
+        expect(player.dispatcher.did_resume_url).toEqual("resume");
+        expect(player.dispatcher.did_complete_url).toEqual("complete");
+        expect(player.dispatcher.first_quartile_url).toEqual("first");
+        expect(player.dispatcher.midpoint_url).toEqual("midpoint");
+        expect(player.dispatcher.third_quartile_url).toEqual("third");
+        expect(player.dispatcher.did_pause_url).toEqual("pause");
     });
 
     describe("play", function() {
@@ -22,17 +30,17 @@ describe("player", function() {
 
             spyOn(player.dispatcher, "didStart");
             spyOn(player.dispatcher, "didResume");
-            spyOn(player.dispatcher, "didFinish");
+            spyOn(player.dispatcher, "didComplete");
             spyOn(player.dispatcher, "firstQuartile");
-            spyOn(player.dispatcher, "half");
+            spyOn(player.dispatcher, "midpoint");
             spyOn(player.dispatcher, "thirdQuartile");
 
             player.play();
             expect(player.dispatcher.didStart).toHaveBeenCalled();
             expect(player.dispatcher.didResume).not.toHaveBeenCalled();
-            expect(player.dispatcher.didFinish).not.toHaveBeenCalled();
+            expect(player.dispatcher.didComplete).not.toHaveBeenCalled();
             expect(player.dispatcher.firstQuartile).not.toHaveBeenCalled();
-            expect(player.dispatcher.half).not.toHaveBeenCalled();
+            expect(player.dispatcher.midpoint).not.toHaveBeenCalled();
             expect(player.dispatcher.thirdQuartile).not.toHaveBeenCalled();
             expect(player.timerId).toBeDefined();
         });
@@ -42,16 +50,16 @@ describe("player", function() {
 
             var player = createPlayer();
 
-            spyOn(player.dispatcher, "didFinish");
+            spyOn(player.dispatcher, "didComplete");
             spyOn(player.dispatcher, "firstQuartile");
-            spyOn(player.dispatcher, "half");
+            spyOn(player.dispatcher, "midpoint");
             spyOn(player.dispatcher, "thirdQuartile");
 
             player.play();
             jasmine.clock().tick(100 * 36);
-            expect(player.dispatcher.didFinish).not.toHaveBeenCalled();
+            expect(player.dispatcher.didComplete).not.toHaveBeenCalled();
             expect(player.dispatcher.firstQuartile).not.toHaveBeenCalled();
-            expect(player.dispatcher.half).not.toHaveBeenCalled();
+            expect(player.dispatcher.midpoint).not.toHaveBeenCalled();
             expect(player.dispatcher.thirdQuartile).not.toHaveBeenCalled();
 
             jasmine.clock().tick(101);
@@ -60,25 +68,25 @@ describe("player", function() {
             jasmine.clock().uninstall();
         });
 
-        it("half", function (){
+        it("midpoint", function (){
             jasmine.clock().install();
 
             var player = createPlayer();
 
-            spyOn(player.dispatcher, "didFinish");
+            spyOn(player.dispatcher, "didComplete");
             spyOn(player.dispatcher, "firstQuartile");
-            spyOn(player.dispatcher, "half");
+            spyOn(player.dispatcher, "midpoint");
             spyOn(player.dispatcher, "thirdQuartile");
 
             player.play();
             jasmine.clock().tick(100 * 74);
-            expect(player.dispatcher.didFinish).not.toHaveBeenCalled();
+            expect(player.dispatcher.didComplete).not.toHaveBeenCalled();
             expect(player.dispatcher.firstQuartile).toHaveBeenCalled();
-            expect(player.dispatcher.half).not.toHaveBeenCalled();
+            expect(player.dispatcher.midpoint).not.toHaveBeenCalled();
             expect(player.dispatcher.thirdQuartile).not.toHaveBeenCalled();
 
             jasmine.clock().tick(101);
-            expect(player.dispatcher.half).toHaveBeenCalled();
+            expect(player.dispatcher.midpoint).toHaveBeenCalled();
 
             jasmine.clock().uninstall();
         });
@@ -88,16 +96,16 @@ describe("player", function() {
 
             var player = createPlayer();
 
-            spyOn(player.dispatcher, "didFinish");
+            spyOn(player.dispatcher, "didComplete");
             spyOn(player.dispatcher, "firstQuartile");
-            spyOn(player.dispatcher, "half");
+            spyOn(player.dispatcher, "midpoint");
             spyOn(player.dispatcher, "thirdQuartile");
 
             player.play();
             jasmine.clock().tick(100 * 112);
-            expect(player.dispatcher.didFinish).not.toHaveBeenCalled();
+            expect(player.dispatcher.didComplete).not.toHaveBeenCalled();
             expect(player.dispatcher.firstQuartile).toHaveBeenCalled();
-            expect(player.dispatcher.half).toHaveBeenCalled();
+            expect(player.dispatcher.midpoint).toHaveBeenCalled();
             expect(player.dispatcher.thirdQuartile).not.toHaveBeenCalled();
 
             jasmine.clock().tick(101);
@@ -106,26 +114,26 @@ describe("player", function() {
             jasmine.clock().uninstall();
         });
 
-        it("didFinish", function (){
+        it("didComplete", function (){
             jasmine.clock().install();
 
             var player = createPlayer();
 
-            spyOn(player.dispatcher, "didFinish");
+            spyOn(player.dispatcher, "didComplete");
             spyOn(player.dispatcher, "didPause");
             spyOn(player.dispatcher, "firstQuartile");
-            spyOn(player.dispatcher, "half");
+            spyOn(player.dispatcher, "midpoint");
             spyOn(player.dispatcher, "thirdQuartile");
 
             player.play();
             jasmine.clock().tick(100 * 151);
-            expect(player.dispatcher.didFinish).not.toHaveBeenCalled();
+            expect(player.dispatcher.didComplete).not.toHaveBeenCalled();
             expect(player.dispatcher.firstQuartile).toHaveBeenCalled();
-            expect(player.dispatcher.half).toHaveBeenCalled();
+            expect(player.dispatcher.midpoint).toHaveBeenCalled();
             expect(player.dispatcher.thirdQuartile).toHaveBeenCalled();
 
             jasmine.clock().tick(101);
-            expect(player.dispatcher.didFinish).toHaveBeenCalled();
+            expect(player.dispatcher.didComplete).toHaveBeenCalled();
             expect(player.dispatcher.didPause).not.toHaveBeenCalled();
 
             jasmine.clock().uninstall();

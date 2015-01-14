@@ -27,6 +27,13 @@
           data-frame-width=320
           data-frame-height=180
           data-fps=12
+          data-did-start-url=""
+          data-did-resume-url=""
+          data-did-complete-url=""
+          data-first-quartile-url=""
+          data-midpoint-url=""
+          data-third-quartile-url=""
+          data-did-pause-url=""
           style="display: none;"
           >
           <div
@@ -73,7 +80,7 @@
   <!--スクリプトの実行-->
   <script>
     window.onload = function(){
-        MVPlayer.Controller.run(document.getElementById("video_container"));
+        MVPlayer.Controller.run(document.getElementById("video_container"), true);
     };
   </script>
 </body>
