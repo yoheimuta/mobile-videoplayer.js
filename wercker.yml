@@ -42,7 +42,7 @@ build:
     - script:
         name: Test
         code: |
-          sudo xvfb-run grunt test
+          sudo xvfb-run grunt test --verbose
 
   after-steps:
 

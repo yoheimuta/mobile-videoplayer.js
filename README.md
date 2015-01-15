@@ -34,14 +34,12 @@ Set data-*-url to send fine-grained impression trackings following `VAST` format
       <div
           data-url="assets/tamagotchi_320x180_1.a9ac945e.jpg"
           class="strip"
-          data-frames-count=54
           >
           <img>
       </div>
       <div
           data-url="assets/tamagotchi_320x180_2.d10717e2.jpg"
           class="strip"
-          data-frames-count=54
           style="display: none;"
           >
           <img>
@@ -49,7 +47,6 @@ Set data-*-url to send fine-grained impression trackings following `VAST` format
       <div
           data-url="assets/tamagotchi_320x180_3.a6a03603.jpg"
           class="strip"
-          data-frames-count=54
           style="display: none;"
           >
           <img>
@@ -57,7 +54,6 @@ Set data-*-url to send fine-grained impression trackings following `VAST` format
       <div
           data-url="assets/tamagotchi_320x180_4.0895f168.jpg"
           class="strip"
-          data-frames-count=21
           style="display: none;"
           >
           <img>

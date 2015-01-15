@@ -11,67 +11,100 @@ describe("multi_strip", function() {
         expect(movie.strip_loaded_count).toEqual(0);
         expect(movie.strip_already_loading).toEqual(false);
         expect(movie.strips.length).toEqual(3);
-        expect(movie.strips[0].frame_index).toEqual(0);
-        expect(movie.strips[1].frame_index).toEqual(0);
-        expect(movie.strips[2].frame_index).toEqual(0);
     });
 
-    it("getCurrentFrameIndex", function() {
+    it("load", function(done) {
         var movie = createMovie();
+        movie.load(function(err) {
+            expect(err).toBeNull();
+            expect(movie.strips[0].frame_count).toEqual(54);
+            expect(movie.strips[1].frame_count).toEqual(54);
+            expect(movie.strips[2].frame_count).toEqual(54);
 
-        for (var i = 0; i < 54+54+44; i++) {
-            expect(movie.getCurrentFrameIndex()).toEqual(i+1);
-            movie.move();
-        }
-        expect(movie.getCurrentFrameIndex()).toEqual(54+54+1);
+            // valid dup call
+            movie.load(function(err) {
+                expect(err).toBeNull();
+                done();
+            });
+        });
+
+        expect(movie.strip_already_loading).toEqual(true);
+
+        // invalid dup call
+        movie.load(function(err) {
+            expect(err).not.toBeNull();
+        });
     });
 
-    it("getTotalFrameCount", function() {
+    it("getCurrentFrameIndex", function(done) {
         var movie = createMovie();
-        expect(movie.getTotalFrameCount()).toEqual(54+54+44);
+        movie.load(function(err) {
+            for (var i = 0; i < 54+54+54; i++) {
+                expect(movie.getCurrentFrameIndex()).toEqual(i+1);
+                movie.move();
+            }
+            expect(movie.getCurrentFrameIndex()).toEqual(54+54+1);
+            done();
+        });
     });
 
-    it("isInit", function() {
+    it("getTotalFrameCount", function(done) {
         var movie = createMovie();
-        expect(movie.isInit()).toEqual(true);
+        movie.load(function() {
+            expect(movie.getTotalFrameCount()).toEqual(54+54+54);
+            done();
+        });
     });
 
-    it("isFinished", function() {
+    it("isInit", function(done) {
         var movie = createMovie();
-        for (var i = 0; i < 54+54+44-1; i++) {
-            movie.move();
-        }
-        expect(movie.isFinished()).toEqual(true);
+        movie.load(function() {
+            expect(movie.isInit()).toEqual(true);
+            done();
+        });
     });
 
-    it("move", function() {
+    it("isFinished", function(done) {
         var movie = createMovie();
+        movie.load(function() {
+            for (var i = 0; i < 54+54+54-1; i++) {
+                movie.move();
+            }
+            expect(movie.isFinished()).toEqual(true);
+            done();
+        });
+    });
 
-        for (var i = 0; i < 54; i++) {
-            expect(movie.strip_index).toEqual(0);
-            expect(movie.strips[0].frame_index).toEqual(i);
-            movie.move();
-        }
+    it("move", function(done) {
+        var movie = createMovie();
+        movie.load(function() {
+            for (var i = 0; i < 54; i++) {
+                expect(movie.strip_index).toEqual(0);
+                expect(movie.strips[0].frame_index).toEqual(i);
+                movie.move();
+            }
 
-        for (var i = 0; i < 54; i++) {
-            expect(movie.strip_index).toEqual(1);
-            expect(movie.strips[1].frame_index).toEqual(i);
-            movie.move();
-        }
+            for (var i = 0; i < 54; i++) {
+                expect(movie.strip_index).toEqual(1);
+                expect(movie.strips[1].frame_index).toEqual(i);
+                movie.move();
+            }
 
-        for (var i = 0; i < 44; i++) {
+            for (var i = 0; i < 54; i++) {
+                expect(movie.strip_index).toEqual(2);
+                expect(movie.strips[2].frame_index).toEqual(i);
+                movie.move();
+            }
+
             expect(movie.strip_index).toEqual(2);
-            expect(movie.strips[2].frame_index).toEqual(i);
-            movie.move();
-        }
-
-        expect(movie.strip_index).toEqual(2);
-        expect(movie.strips[2].frame_index).toEqual(0);
+            expect(movie.strips[2].frame_index).toEqual(0);
+            done();
+        });
     });
 
     function createMovie() {
-        var width    = 100;
-        var height   = 200;
+        var width    = 320;
+        var height   = 180;
         var elements = document.getElementsByClassName("strip");
 
         return new MVPlayer.MultiStrip(width, height, elements);

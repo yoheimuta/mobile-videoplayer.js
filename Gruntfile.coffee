@@ -64,6 +64,7 @@ module.exports = (grunt) ->
             ]
             options:
                 parallel: 8
+                timeout: 5
                 framework: "jasmine2"
                 launch_in_ci: ["PhantomJS"]
                 launch_in_dev: ["PhantomJS"] # allow to use only: grunt testem:run:short
@@ -76,6 +77,7 @@ module.exports = (grunt) ->
             ]
             options:
                 parallel: 8
+                timeout: 10
                 framework: "jasmine2"
                 launch_in_ci: ["PhantomJS", "Chrome", "Firefox"]
                 launch_in_dev: ["PhantomJS", "Chrome", "ChromeCanary", "Firefox", "Safari", "IE7", "IE8", "IE9"] # allow to use only: grunt testem:run:long
@@ -128,11 +130,13 @@ module.exports = (grunt) ->
   grunt.registerTask "server", (target) ->
 
     if (target != "dist")
-      return grunt.task.run ["jshint", "testem:ci:short", "connect:dev", "watch:dev"]
+      return grunt.task.run ["jshint", "testem:ci:short", "run"]
     else
       return grunt.task.run ["connect:dist", "watch:dist"]
 
   grunt.registerTask "test", ["jshint", "testem:ci:long"]
+
+  grunt.registerTask "run", ["connect:dev", "watch:dev"]
 
   grunt.registerTask "default", ["build", "server:dist"]
 

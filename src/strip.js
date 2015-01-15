@@ -5,16 +5,32 @@ MVPlayer.Strip = (function() {
         this.width       = width;
         this.height      = height;
         this.image_url   = element.dataset.url;
-        this.frame_count = parseInt(element.dataset.framesCount, 10);
         this.element     = element;
 
         this._initStyles();
-        this._initFrames();
         this._initStripImages();
+    }
+
+    function getNaturalHeight(element, url, callback) {
+        if ("naturalHeight" in (new Image())) {
+            callback(element.naturalHeight);
+            return;
+        }
+
+        var tmp = new Image();
+        tmp.src = url;
+        tmp.addEventListener("load", function() {
+            callback(tmp.height);
+        });
     }
 
     Strip.prototype._initStyles = function() {
         this.element.style.position = "absolute";
+    };
+
+    Strip.prototype._initStripImages = function() {
+        this.image_element = this.element.getElementsByTagName("img")[0];
+        this.image_element.style.width  = this.width + "px";
     };
 
     Strip.prototype._initFrames = function() {
@@ -24,12 +40,6 @@ MVPlayer.Strip = (function() {
             this.frames.push(frame);
         }
         this.frame_index = 0;
-    };
-
-    Strip.prototype._initStripImages = function() {
-        this.imageElement = this.element.getElementsByTagName("img")[0];
-        this.imageElement.style.width  = this.width + "px";
-        this.imageElement.style.height = (this.height * this.frame_count) + "px";
     };
 
     Strip.prototype.activate = function() {
@@ -46,8 +56,16 @@ MVPlayer.Strip = (function() {
     };
 
     Strip.prototype.load = function(callback) {
-        this.imageElement.addEventListener("load", callback, false);
-        this.imageElement.src = this.image_url;
+        var that = this;
+        this.image_element.addEventListener("load", function() {
+            getNaturalHeight(this, that.image_url, function(nh) {
+                that.image_element.style.height = nh + "px";
+                that.frame_count = nh / that.height;
+                that._initFrames();
+                callback();
+            });
+        }, false);
+        this.image_element.src = this.image_url;
     };
 
     Strip.prototype.move = function() {

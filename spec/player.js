@@ -24,10 +24,25 @@ describe("player", function() {
         expect(player.dispatcher.did_pause_url).toEqual("pause");
     });
 
-    describe("play", function() {
-        it("init", function (){
-            var player = createPlayer();
+    it("load", function (done) {
+        var player = createPlayer();
+        player.load(function(err) {
+            expect(err).toBeNull();
+            done();
+        });
+    });
 
+    describe("play", function() {
+        var player;
+
+        beforeEach(function(done) {
+            player = createPlayer();
+            player.load(function() {
+                done();
+            });
+        });
+
+        it("init", function (){
             spyOn(player.dispatcher, "didStart");
             spyOn(player.dispatcher, "didResume");
             spyOn(player.dispatcher, "didComplete");
@@ -48,15 +63,13 @@ describe("player", function() {
         it("firstQuartile", function (){
             jasmine.clock().install();
 
-            var player = createPlayer();
-
             spyOn(player.dispatcher, "didComplete");
             spyOn(player.dispatcher, "firstQuartile");
             spyOn(player.dispatcher, "midpoint");
             spyOn(player.dispatcher, "thirdQuartile");
 
             player.play();
-            jasmine.clock().tick(100 * 36);
+            jasmine.clock().tick(100 * 38);
             expect(player.dispatcher.didComplete).not.toHaveBeenCalled();
             expect(player.dispatcher.firstQuartile).not.toHaveBeenCalled();
             expect(player.dispatcher.midpoint).not.toHaveBeenCalled();
@@ -71,15 +84,13 @@ describe("player", function() {
         it("midpoint", function (){
             jasmine.clock().install();
 
-            var player = createPlayer();
-
             spyOn(player.dispatcher, "didComplete");
             spyOn(player.dispatcher, "firstQuartile");
             spyOn(player.dispatcher, "midpoint");
             spyOn(player.dispatcher, "thirdQuartile");
 
             player.play();
-            jasmine.clock().tick(100 * 74);
+            jasmine.clock().tick(100 * 79);
             expect(player.dispatcher.didComplete).not.toHaveBeenCalled();
             expect(player.dispatcher.firstQuartile).toHaveBeenCalled();
             expect(player.dispatcher.midpoint).not.toHaveBeenCalled();
@@ -94,15 +105,13 @@ describe("player", function() {
         it("thirdQuartile", function (){
             jasmine.clock().install();
 
-            var player = createPlayer();
-
             spyOn(player.dispatcher, "didComplete");
             spyOn(player.dispatcher, "firstQuartile");
             spyOn(player.dispatcher, "midpoint");
             spyOn(player.dispatcher, "thirdQuartile");
 
             player.play();
-            jasmine.clock().tick(100 * 112);
+            jasmine.clock().tick(100 * 119);
             expect(player.dispatcher.didComplete).not.toHaveBeenCalled();
             expect(player.dispatcher.firstQuartile).toHaveBeenCalled();
             expect(player.dispatcher.midpoint).toHaveBeenCalled();
@@ -117,8 +126,6 @@ describe("player", function() {
         it("didComplete", function (){
             jasmine.clock().install();
 
-            var player = createPlayer();
-
             spyOn(player.dispatcher, "didComplete");
             spyOn(player.dispatcher, "didPause");
             spyOn(player.dispatcher, "firstQuartile");
@@ -126,7 +133,7 @@ describe("player", function() {
             spyOn(player.dispatcher, "thirdQuartile");
 
             player.play();
-            jasmine.clock().tick(100 * 151);
+            jasmine.clock().tick(100 * 161);
             expect(player.dispatcher.didComplete).not.toHaveBeenCalled();
             expect(player.dispatcher.firstQuartile).toHaveBeenCalled();
             expect(player.dispatcher.midpoint).toHaveBeenCalled();
@@ -140,26 +147,28 @@ describe("player", function() {
         });
     });
 
-    it("pause", function() {
+    it("pause", function(done) {
         jasmine.clock().install();
 
         var player = createPlayer();
+        player.load(function() {
+            spyOn(player.dispatcher, "didPause");
+            spyOn(player.dispatcher, "didResume");
 
-        spyOn(player.dispatcher, "didPause");
-        spyOn(player.dispatcher, "didResume");
+            player.play();
 
-        player.play();
+            jasmine.clock().tick(100);
+            expect(player.dispatcher.didResume).not.toHaveBeenCalled();
 
-        jasmine.clock().tick(100);
-        expect(player.dispatcher.didResume).not.toHaveBeenCalled();
+            player.pause();
+            expect(player.dispatcher.didPause).toHaveBeenCalled();
 
-        player.pause();
-        expect(player.dispatcher.didPause).toHaveBeenCalled();
+            player.play();
+            expect(player.dispatcher.didResume).toHaveBeenCalled();
 
-        player.play();
-        expect(player.dispatcher.didResume).toHaveBeenCalled();
-
-        jasmine.clock().uninstall();
+            jasmine.clock().uninstall();
+            done();
+        });
     });
 
     function createPlayer() {
