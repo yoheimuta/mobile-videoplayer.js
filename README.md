@@ -18,6 +18,7 @@ Note that `tamagotchi_4u.mp4` which is used to show this product demo is [CC BY]
 Create the container tag.
 
 - `load-scene` class element is displayed until the video is finished loading.
+- `play-scene` class element has one or multiple strip class elements. See [Question](/README.md#question) below to understand why you must prepare multiple images to show long video.
 - `replay-scene` class element and `done-scene` class element are displayed after the video is finished playing.
 - `replay-scene` class element is going to be registered click event to replay the video.
 
@@ -156,3 +157,16 @@ Use [jani-strip_maker](https://github.com/shin1ohno/jani-strip_maker).
 ```sh
 ./bin/strip_maker from_movie_to_strips --input_file ./src/assets/tamagotchi_4u.mp4 --fps 12 --height 180 --width 320
 ```
+
+### Question
+
+The reason why multiple images are needed is that [mobile version of Safari automatically downsamples any jpg when it hits the 1024x1024 pixel limit](http://www.tomshardware.com/reviews/ipad-3-benchmark-review,3156-5.html).
+
+- According to [Apple's Guideline about Know iOS Resource Limits](https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/CreatingContentforSafarioniPhone/CreatingContentforSafarioniPhone.html), the limit about 1024 pixel seems to me not to be applied to jpg.
+- But when I tried to use an over 1024 pixel jpg in mobile version of Safari, I could confirm to be rendered a terribly coarse one.
+
+[jani-strip_maker](https://github.com/shin1ohno/jani-strip_maker) is supported to split into multiple jpgs automatically for avoiding this limit.
+
+### Licence
+
+Licensed under the MIT license.
