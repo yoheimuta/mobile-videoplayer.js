@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>(high-quality) mobile-videoplayer</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+  <!-- build:js mvplayer.min.js -->
+  <script src="util.js"></script>
+  <script src="strip.js"></script>
+  <script src="multi_strip.js"></script>
+  <script src="player.js"></script>
+  <script src="appearance_detector.js"></script>
+  <script src="player_event_dispatcher.js"></script>
+  <script src="controller.js"></script>
+  <!-- endbuild -->
+</head>
+<body style="margin:0">
+  <!--表示コンテナ-->
+  <div id="video_container">
+      <div class="load-scene">
+          <img src="http://placehold.it/320x180">
+      </div>
+
+      <div
+          class="play-scene"
+          data-frame-width=320
+          data-frame-height=180
+          data-fps=30
+          data-did-start-url=""
+          data-did-resume-url=""
+          data-did-complete-url=""
+          data-first-quartile-url=""
+          data-midpoint-url=""
+          data-third-quartile-url=""
+          data-did-pause-url=""
+          style="display: none;"
+          >
+          <div
+              data-url="assets/tamagotchi_f30_320x180_1.jpg"
+              class="strip"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_f30_320x180_2.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_f30_320x180_3.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_f30_320x180_4.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_f30_320x180_5.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_f30_320x180_6.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_f30_320x180_7.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_f30_320x180_8.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_f30_320x180_9.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+      </div>
+
+      <div class="replay-scene" style="display: none;">
+          <p>replay ?</p>
+      </div>
+
+      <div class="done-scene" style="display: none;">
+          <img src="http://placehold.it/320x180">
+      </div>
+  </div>
+  <!--スクリプトの実行-->
+  <script>
+    window.onload = function(){
+        MVPlayer.Controller.run(document.getElementById("video_container"), true);
+    };
+  </script>
+</body>
+</html>
+
+
