@@ -1,3 +1,5 @@
+"use strict";
+
 var MVPlayer = window.MVPlayer = window.MVPlayer || {};
 
 MVPlayer.AppearanceDetector = (function() {
