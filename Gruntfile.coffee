@@ -59,7 +59,13 @@ module.exports = (grunt) ->
             src: [
                 "bower_components/jquery/dist/jquery.min.js"
                 "bower_components/jasmine-jquery/lib/jasmine-jquery.js"
-                "src/**/*.js"
+                "src/util.js"
+                "src/strip.js"
+                "src/multi_strip.js"
+                "src/player.js"
+                "src/appearance_detector.js"
+                "src/player_event_dispatcher.js"
+                "src/controller.js"
                 "spec/**/*.js"
             ]
             options:
@@ -72,7 +78,13 @@ module.exports = (grunt) ->
             src: [
                 "bower_components/jquery/dist/jquery.min.js"
                 "bower_components/jasmine-jquery/lib/jasmine-jquery.js"
-                "src/**/*.js"
+                "src/util.js"
+                "src/strip.js"
+                "src/multi_strip.js"
+                "src/player.js"
+                "src/appearance_detector.js"
+                "src/player_event_dispatcher.js"
+                "src/controller.js"
                 "spec/**/*.js"
             ]
             options:

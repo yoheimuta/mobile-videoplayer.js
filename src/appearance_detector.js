@@ -19,8 +19,8 @@ MVPlayer.AppearanceDetector = (function() {
     };
 
     AppearanceDetector.prototype._bottomVisible = function() {
-        var y = this.element.getBoundingClientRect().bottom;
-        var height = window.innerHeight;
+        var y      = this.element.getBoundingClientRect().bottom;
+        var height = (window.innerHeight||document.documentElement.clientHeight||0);
         return y - this.bottom_margin < height;
     };
 

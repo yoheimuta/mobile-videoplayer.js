@@ -1,10 +1,12 @@
 var MVPlayer = window.MVPlayer = window.MVPlayer || {};
 
 MVPlayer.Strip = (function() {
+    var Util = MVPlayer.Util;
+
     function Strip(width, height, element) {
         this.width       = width;
         this.height      = height;
-        this.image_url   = element.dataset.url;
+        this.image_url   = MVPlayer.Util.getFromDataSet(element, "url");
         this.element     = element;
 
         this._initStyles();
@@ -18,10 +20,10 @@ MVPlayer.Strip = (function() {
         }
 
         var tmp = new Image();
-        tmp.src = url;
-        tmp.addEventListener("load", function() {
+        Util.addEventListener(tmp, "load", function() {
             callback(tmp.height);
         });
+        tmp.src = url;
     }
 
     Strip.prototype._initStyles = function() {
@@ -57,7 +59,7 @@ MVPlayer.Strip = (function() {
 
     Strip.prototype.load = function(callback) {
         var that = this;
-        this.image_element.addEventListener("load", function() {
+        Util.addEventListener(this.image_element, "load", function() {
             getNaturalHeight(this, that.image_url, function(nh) {
                 that.image_element.style.height = nh + "px";
                 that.frame_count = nh / that.height;

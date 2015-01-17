@@ -2,6 +2,7 @@ var MVPlayer = window.MVPlayer = window.MVPlayer || {};
 
 MVPlayer.Controller = (function() {
     var Controller = {};
+    var Util = MVPlayer.Util;
 
     var _is_appear = false;
     var _is_debug  = false;
@@ -51,7 +52,7 @@ MVPlayer.Controller = (function() {
         })(player.dispatcher.didComplete);
 
         if (replayElement) {
-            replayElement.addEventListener("click", function() {
+            Util.addEventListener(replayElement, "click", function() {
                 player.element.style.display = "";
 
                 if (replayElement) {
@@ -70,7 +71,7 @@ MVPlayer.Controller = (function() {
             function() { _play(player, loadElement); },
             function() { _finish(player); }
         );
-        document.addEventListener("scroll", function() {
+        Util.addEventListener(document, "scroll", function() {
             detector.detect();
         });
     }
@@ -78,16 +79,16 @@ MVPlayer.Controller = (function() {
     Controller.run = function(element, is_debug) {
         _is_debug = is_debug;
 
-        var playElement = element.getElementsByClassName("play-scene")[0];
+        var playElement = Util.getElementsByClassName(element, "play-scene")[0];
         if (!playElement) {
             return;
         }
 
         var player = new MVPlayer.Player(playElement, _is_debug);
 
-        var loadElement   = element.getElementsByClassName("load-scene")[0];
-        var replayElement = element.getElementsByClassName("replay-scene")[0];
-        var doneElement   = element.getElementsByClassName("done-scene")[0];
+        var loadElement   = Util.getElementsByClassName(element, "load-scene")[0];
+        var replayElement = Util.getElementsByClassName(element, "replay-scene")[0];
+        var doneElement   = Util.getElementsByClassName(element, "done-scene")[0];
 
         _setupEvents(element, player, loadElement, replayElement, doneElement);
     };

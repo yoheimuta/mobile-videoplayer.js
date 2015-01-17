@@ -1,18 +1,23 @@
 var MVPlayer = window.MVPlayer = window.MVPlayer || {};
 
 MVPlayer.Player = (function() {
-    function Player(element, is_debug) {
-        var d = element.dataset;
-        var w = parseInt(d.frameWidth, 10);
-        var h = parseInt(d.frameHeight, 10);
+    var Util = MVPlayer.Util;
 
-        this.movie = new MVPlayer.MultiStrip(w, h, element.getElementsByClassName("strip"));
-        this.dispatcher = new MVPlayer.PlayerEventDispatcher(is_debug, d.didStartUrl, d.didResumeUrl,
-            d.didCompleteUrl, d.firstQuartileUrl, d.midpointUrl, d.thirdQuartileUrl, d.didPauseUrl);
+    function Player(ele, is_debug) {
 
-        this.fps = parseInt(d.fps, 10);
+        var dattr = Util.getFromDataSet;
 
-        this.element = element;
+        var w = parseInt(dattr(ele, "frame-width"), 10);
+        var h = parseInt(dattr(ele, "frame-height"), 10);
+
+        this.movie = new MVPlayer.MultiStrip(w, h, Util.getElementsByClassName(ele, "strip"));
+        this.dispatcher = new MVPlayer.PlayerEventDispatcher(is_debug, dattr(ele, "did-start-url"),
+            dattr(ele, "did-resume-url"), dattr(ele, "did-complete-url"), dattr(ele, "first-quartile-url"),
+            dattr(ele, "midpoint-url"), dattr(ele, "third-quartile-url"), dattr(ele, "did-pause-url"));
+
+        this.fps = parseInt(dattr(ele, "fps"), 10);
+
+        this.element = ele;
         this.element.style.width    = w + "px";
         this.element.style.height   = h + "px";
         this.element.style.position = "relative";

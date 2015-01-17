@@ -82,6 +82,15 @@ window.onload = function(){
 </script>
 ```
 
+### Support
+
+Confirmed to work well in these browsers listed below.
+
+```
+IE6, IE7, IE8, Safari(7.1/8), Firefox(31), Chrome(39),
+iOS Safari(iOS6, iOS7, iOS8), Android(2.2, 4.4, 5)
+```
+
 ### Install
 
 Install grunt and bower commands.
