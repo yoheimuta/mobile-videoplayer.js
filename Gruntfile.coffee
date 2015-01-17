@@ -16,7 +16,7 @@ module.exports = (grunt) ->
     connect:
         options:
             port: 9000
-            hostname: "localhost"
+            hostname: "0.0.0.0" # cannot omit, default is "127.0.0.1"
         dev:
             options:
                 middleware: (connect, options) ->

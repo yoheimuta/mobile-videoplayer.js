@@ -11,6 +11,10 @@ Note that `tamagotchi_4u.mp4` which is used to show this product demo is [CC BY]
 Create the container tag.
 Set data-*-url to send fine-grained impression trackings following `VAST` format as close as possible.
 
+- `load-scene` class element is displayed until the video is finished loading.
+- `replay-scene` class element and `done-scene` class element are displayed after the video is finished playing.
+- `replay-scene` class element is going to be registered click event to replay the video.
+
 ```html
 <div id="video_container">
   <div class="load-scene">
@@ -91,6 +95,8 @@ IE6, IE7, IE8, Safari(7.1/8), Firefox(31), Chrome(39),
 iOS Safari(iOS6, iOS7, iOS8), Android(2.2, 4.4, 5)
 ```
 
+Confirmed that time to complete loading and then start video is about 3~4 sec in mobile 3G network.
+
 ### Install
 
 Install grunt and bower commands.
@@ -103,7 +109,7 @@ sudo npm install -g bower
 Then install node module local dependencies.
 
 ```sh
-sudo npm install
+npm install
 ```
 
 And install bower components.
