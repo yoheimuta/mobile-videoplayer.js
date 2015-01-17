@@ -6,6 +6,13 @@
 
 Note that `tamagotchi_4u.mp4` which is used to show this product demo is [CC BY](http://creativecommons.org/licenses/by/2.1/jp/), belonged to BandaiJP.
 
+### Demo
+
+[Simple page to confirm basic functionality](http://yoheimuta.github.io/mobile-videoplayer.js)
+
+[Long scroll page to confirm autoplay and autopause](http://yoheimuta.github.io/mobile-videoplayer.js/scroll.html)
+
+
 ### Usage
 
 Create the container tag.

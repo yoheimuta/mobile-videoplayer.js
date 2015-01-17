@@ -50,3 +50,8 @@ build:
     # see http://qiita.com/nekogeruge_987/items/f2c9bc1e258128d49373
     - wantedly/pretty-slack-notify:
         webhook_url: https://hooks.slack.com/services/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
+deploy:
+    steps:
+        - lukevivier/gh-pages:
+            token: $GITHUB_TOKEN
+            basedir: ./dist
