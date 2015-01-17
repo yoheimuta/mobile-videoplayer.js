@@ -1,6 +1,6 @@
 # mobile-videoplayer.js
 
-[![wercker status](https://app.wercker.com/status/07c0029e4a957bcb24fe5eb2b5430386/m "wercker status")](https://app.wercker.com/project/bykey/07c0029e4a957bcb24fe5eb2b5430386)
+[![wercker status](https://app.wercker.com/status/84fc7c16eecdfd40bfbb81322392db0b/m "wercker status")](https://app.wercker.com/project/bykey/84fc7c16eecdfd40bfbb81322392db0b)
 
 `mobile-videoplayer.js` is the videoplayer for mobile browser, especially for ios safari which is disabled to autoplay mp4, inspired by [jani](https://github.com/shin1ohno/jani).
 
@@ -9,11 +9,12 @@ Note that `tamagotchi_4u.mp4` which is used to show this product demo is [CC BY]
 ### Usage
 
 Create the container tag.
-Set data-*-url to send fine-grained impression trackings following `VAST` format as close as possible.
 
 - `load-scene` class element is displayed until the video is finished loading.
 - `replay-scene` class element and `done-scene` class element are displayed after the video is finished playing.
 - `replay-scene` class element is going to be registered click event to replay the video.
+
+Set `data-*-url` to send fine-grained impression trackings following `VAST` format as close as possible.
 
 ```html
 <div id="video_container">
@@ -75,7 +76,8 @@ Set data-*-url to send fine-grained impression trackings following `VAST` format
 ```
 
 Insert the script.
-Give the container element id as 1st arg and is_debug flag to console log as 2nd arg.
+
+Pass `container element id` as 1st arg and `is_debug flag to console log` as 2nd arg.
 
 ```html
 <script src="mvplayer.min.js"></script>
@@ -95,7 +97,7 @@ IE6, IE7, IE8, Safari(7.1/8), Firefox(31), Chrome(39),
 iOS Safari(iOS6, iOS7, iOS8), Android(2.2, 4.4, 5)
 ```
 
-Confirmed that time to complete loading and then start video is about 3~4 sec in mobile 3G network.
+Also confirmed that time to complete loading and then start video is about 3~4 sec in mobile 3G network.
 
 ### Install
 
