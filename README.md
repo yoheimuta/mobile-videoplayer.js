@@ -1,6 +1,7 @@
 # mobile-videoplayer.js
 
 [![wercker status](https://app.wercker.com/status/84fc7c16eecdfd40bfbb81322392db0b/m "wercker status")](https://app.wercker.com/project/bykey/84fc7c16eecdfd40bfbb81322392db0b)
+[![Code Climate](https://codeclimate.com/github/yoheimuta/mobile-videoplayer.js/badges/gpa.svg)](https://codeclimate.com/github/yoheimuta/mobile-videoplayer.js)
 
 `mobile-videoplayer.js` is the videoplayer for mobile browser, especially for ios safari which is disabled to autoplay mp4, inspired by [jani](https://github.com/shin1ohno/jani).
 
@@ -118,7 +119,11 @@ IE6, IE7, IE8, Safari(7.1/8), Firefox(31), Chrome(39),
 iOS Safari(iOS6, iOS7, iOS8), Android(2.2, 4.4, 5)
 ```
 
-Also confirmed that time to complete loading and then start video is about 3~4 sec in mobile 3G network.
+Also confirmed that time to complete loading and then start almost video is about 3~4 sec in mobile 3G network.
+
+### Namespace
+
+`mobile-videoplayer.js` use only one global variable `MVPlayer` to avoid polluting other global namespace.
 
 ### Install
 
