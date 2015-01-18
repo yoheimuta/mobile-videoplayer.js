@@ -68,12 +68,14 @@ module.exports = (grunt) ->
                 "src/controller.js"
                 "spec/**/*.js"
             ]
+            report_file: '.report.tap'
             options:
                 parallel: 8
                 timeout: 5
                 framework: "jasmine2"
                 launch_in_ci: ["PhantomJS"]
                 launch_in_dev: ["PhantomJS"] # allow to use only: grunt testem:run:short
+                reporter: "tap"
         long:
             src: [
                 "bower_components/jquery/dist/jquery.min.js"
@@ -87,12 +89,14 @@ module.exports = (grunt) ->
                 "src/controller.js"
                 "spec/**/*.js"
             ]
+            report_file: '.report.tap'
             options:
                 parallel: 8
                 timeout: 10
                 framework: "jasmine2"
                 launch_in_ci: ["PhantomJS", "Chrome", "Firefox"]
                 launch_in_dev: ["PhantomJS", "Chrome", "ChromeCanary", "Firefox", "Safari", "IE7", "IE8", "IE9"] # allow to use only: grunt testem:run:long
+                reporter: "tap"
 
 
     ####
