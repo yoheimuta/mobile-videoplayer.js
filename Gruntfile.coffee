@@ -97,7 +97,7 @@ module.exports = (grunt) ->
                     "spec/**/*.js"
                 ]
                 parallel: 8
-                timeout: 10
+                timeout: 20
                 framework: "jasmine2"
                 test_page: "tests.mustache"
                 on_start: require("./coverage_server")
