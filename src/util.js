@@ -44,5 +44,9 @@ MVPlayer.Util = (function() {
         });
     };
 
+    Util.innerHeight = function() {
+        return (window.innerHeight||document.documentElement.clientHeight||0);
+    };
+
     return Util;
 })();

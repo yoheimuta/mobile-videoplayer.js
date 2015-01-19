@@ -8,7 +8,7 @@ MVPlayer.Strip = (function() {
     function Strip(width, height, element) {
         this.width       = width;
         this.height      = height;
-        this.image_url   = MVPlayer.Util.getFromDataSet(element, "url");
+        this.image_url   = Util.getFromDataSet(element, "url");
         this.element     = element;
 
         this._initStyles();

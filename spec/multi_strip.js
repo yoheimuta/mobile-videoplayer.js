@@ -78,19 +78,20 @@ describe("multi_strip", function() {
     it("move", function(done) {
         var movie = createMovie();
         movie.load(function() {
-            for (var i = 0; i < 54; i++) {
+            var i;
+            for (i = 0; i < 54; i++) {
                 expect(movie.strip_index).toEqual(0);
                 expect(movie.strips[0].frame_index).toEqual(i);
                 movie.move();
             }
 
-            for (var i = 0; i < 54; i++) {
+            for (i = 0; i < 54; i++) {
                 expect(movie.strip_index).toEqual(1);
                 expect(movie.strips[1].frame_index).toEqual(i);
                 movie.move();
             }
 
-            for (var i = 0; i < 54; i++) {
+            for (i = 0; i < 54; i++) {
                 expect(movie.strip_index).toEqual(2);
                 expect(movie.strips[2].frame_index).toEqual(i);
                 movie.move();

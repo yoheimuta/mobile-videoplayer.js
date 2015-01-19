@@ -9,9 +9,7 @@ MVPlayer.Controller = (function() {
     var _is_appear = false;
     var _is_debug  = false;
 
-    function _play(player, loadElement) {
-        _is_appear = true;
-
+    function _load(player, loadElement) {
         player.load(function(err) {
             if (!_is_appear || err) {
                 return;
@@ -24,6 +22,12 @@ MVPlayer.Controller = (function() {
             player.element.style.display = "";
             player.play();
         });
+    }
+
+    function _play(player, loadElement) {
+        _is_appear = true;
+
+        _load(player, loadElement);
     }
 
     function _finish(player) {
@@ -73,9 +77,11 @@ MVPlayer.Controller = (function() {
             function() { _play(player, loadElement); },
             function() { _finish(player); }
         );
-        Util.addEventListener(document, "scroll", function() {
+        Util.addEventListener(window, "scroll", function() {
             detector.detect();
         });
+
+        _load(player, loadElement);
     }
 
     Controller.run = function(element, is_debug) {

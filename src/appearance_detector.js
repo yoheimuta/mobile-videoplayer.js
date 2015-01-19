@@ -3,6 +3,8 @@
 var MVPlayer = window.MVPlayer = window.MVPlayer || {};
 
 MVPlayer.AppearanceDetector = (function() {
+    var Util = MVPlayer.Util;
+
     function AppearanceDetector(element, top_margin, bottom_margin, didAppear, didDisappear) {
         this.element       = element;
         this.top_margin    = top_margin;
@@ -22,7 +24,7 @@ MVPlayer.AppearanceDetector = (function() {
 
     AppearanceDetector.prototype._bottomVisible = function() {
         var y      = this.element.getBoundingClientRect().bottom;
-        var height = (window.innerHeight||document.documentElement.clientHeight||0);
+        var height = Util.innerHeight();
         return y - this.bottom_margin < height;
     };
 

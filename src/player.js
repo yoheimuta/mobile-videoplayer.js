@@ -7,17 +7,19 @@ MVPlayer.Player = (function() {
 
     function Player(ele, is_debug) {
 
-        var dattr = Util.getFromDataSet;
+        var dattr = function(name) {
+            return Util.getFromDataSet(ele, name);
+        };
 
-        var w = parseInt(dattr(ele, "frame-width"), 10);
-        var h = parseInt(dattr(ele, "frame-height"), 10);
+        var w = parseInt(dattr("frame-width"), 10);
+        var h = parseInt(dattr("frame-height"), 10);
 
         this.movie = new MVPlayer.MultiStrip(w, h, Util.getElementsByClassName(ele, "strip"));
-        this.dispatcher = new MVPlayer.PlayerEventDispatcher(is_debug, dattr(ele, "did-start-url"),
-            dattr(ele, "did-resume-url"), dattr(ele, "did-complete-url"), dattr(ele, "first-quartile-url"),
-            dattr(ele, "midpoint-url"), dattr(ele, "third-quartile-url"), dattr(ele, "did-pause-url"));
+        this.dispatcher = new MVPlayer.PlayerEventDispatcher(is_debug, dattr("did-start-url"),
+            dattr("did-resume-url"), dattr("did-complete-url"), dattr("first-quartile-url"),
+            dattr("midpoint-url"), dattr("third-quartile-url"), dattr("did-pause-url"));
 
-        this.fps = parseInt(dattr(ele, "fps"), 10);
+        this.fps = parseInt(dattr("fps"), 10);
 
         this.element = ele;
         this.element.style.width    = w + "px";
