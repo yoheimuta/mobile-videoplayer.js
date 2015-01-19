@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+    <title>Custom Test'em Page</title>
+    <link rel="stylesheet" href="/testem/jasmine2.css">
+    <script src="/testem/jasmine2.js"></script>
+    <script src="/testem/jasmine2-html.js"></script>
+    <script src="/testem/jasmine2-boot.js"></script>
+    <script src="/testem.js"></script>
+    <script>
+    Testem.on('all-test-results', function(results){
+      var xhr = new XMLHttpRequest()
+      xhr.open('POST', 'http://localhost:7359/')
+      xhr.send(JSON.stringify(window.__coverage__))
+    })
+    </script>
+    {{#serve_files}}<script src="{{src}}" charset="UTF-8"></script>{{/serve_files}}
+</head>
+<body>
+    <h1>Test Page</h1>
+</body>
+</html>

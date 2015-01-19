@@ -68,32 +68,41 @@ module.exports = (grunt) ->
                 "src/controller.js"
                 "spec/**/*.js"
             ]
-            report_file: '.report.tap'
+            report_file: ".report.tap"
             options:
                 parallel: 8
-                timeout: 5
+                timeout: 10
                 framework: "jasmine2"
                 launch_in_ci: ["PhantomJS"]
                 launch_in_dev: ["PhantomJS"] # allow to use only: grunt testem:run:short
                 reporter: "tap"
         long:
-            src: [
-                "bower_components/jquery/dist/jquery.min.js"
-                "bower_components/jasmine-jquery/lib/jasmine-jquery.js"
-                "src/util.js"
-                "src/strip.js"
-                "src/multi_strip.js"
-                "src/player.js"
-                "src/appearance_detector.js"
-                "src/player_event_dispatcher.js"
-                "src/controller.js"
-                "spec/**/*.js"
-            ]
-            report_file: '.report.tap'
+            report_file: ".report.tap"
             options:
+                src_files: [
+                    "bower_components/**/*.js"
+                    "src/**/*.js"
+                    "spec/**/*.js"
+                ]
+                serve_files: [
+                    "bower_components/jquery/dist/jquery.min.js"
+                    "bower_components/jasmine-jquery/lib/jasmine-jquery.js"
+                    ".tmp/instrument/util.js"
+                    ".tmp/instrument/strip.js"
+                    ".tmp/instrument/multi_strip.js"
+                    ".tmp/instrument/player.js"
+                    ".tmp/instrument/appearance_detector.js"
+                    ".tmp/instrument/player_event_dispatcher.js"
+                    ".tmp/instrument/controller.js"
+                    "spec/**/*.js"
+                ]
                 parallel: 8
                 timeout: 10
                 framework: "jasmine2"
+                test_page: "tests.mustache"
+                on_start: require("./coverage_server")
+                before_tests: "./node_modules/istanbul/lib/cli.js instrument --output .tmp/instrument/ src"
+                after_tests: "./node_modules/istanbul/lib/cli.js report"
                 launch_in_ci: ["PhantomJS", "Chrome", "Firefox"]
                 launch_in_dev: ["PhantomJS", "Chrome", "ChromeCanary", "Firefox", "Safari", "IE7", "IE8", "IE9"] # allow to use only: grunt testem:run:long
                 reporter: "tap"
@@ -127,7 +136,7 @@ module.exports = (grunt) ->
 
     filerev:
         options:
-            algorithm: 'md5'
+            algorithm: "md5"
             length: 8
         main:
             src: [
@@ -156,4 +165,4 @@ module.exports = (grunt) ->
 
   grunt.registerTask "default", ["build", "server:dist"]
 
-  require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks
+  require("matchdep").filterDev("grunt-*").forEach grunt.loadNpmTasks

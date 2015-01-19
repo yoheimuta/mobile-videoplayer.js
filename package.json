@@ -6,6 +6,8 @@
   "devDependencies": {
     "grunt": "~0.4.2",
     "matchdep": "~0.3.0",
+    "istanbul": "~0.2.4",
+    "coveralls": "~2.7.1",
     "connect-livereload": "~0.3.0",
     "grunt-contrib-connect": "~0.5.0",
     "grunt-contrib-watch": "~0.5.3",

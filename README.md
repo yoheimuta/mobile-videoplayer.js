@@ -2,6 +2,7 @@
 
 [![wercker status](https://app.wercker.com/status/84fc7c16eecdfd40bfbb81322392db0b/m "wercker status")](https://app.wercker.com/project/bykey/84fc7c16eecdfd40bfbb81322392db0b)
 [![Code Climate](https://codeclimate.com/github/yoheimuta/mobile-videoplayer.js/badges/gpa.svg)](https://codeclimate.com/github/yoheimuta/mobile-videoplayer.js)
+[![Coverage Status](https://coveralls.io/repos/yoheimuta/mobile-videoplayer.js/badge.svg)](https://coveralls.io/r/yoheimuta/mobile-videoplayer.js)
 
 `mobile-videoplayer.js` is the videoplayer for mobile browser, especially for ios safari which is disabled to autoplay mp4, inspired by [jani](https://github.com/shin1ohno/jani).
 
@@ -166,6 +167,13 @@ Run tests using FireFox, Chrome, Safari, PhantomJS and other (see `Grunt.coffee`
 
 ```sh
 grunt testem:run:long
+```
+
+Run tests to generate test coverage.
+
+```sh
+grunt testem:run:long
+open coverage/lcov-report/index.html
 ```
 
 ### Convert mp4 to jpgs
