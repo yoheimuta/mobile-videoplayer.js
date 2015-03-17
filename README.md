@@ -14,20 +14,12 @@ Note that `tamagotchi_4u.mp4` which is used to show this product demo is [CC BY]
 
 [Simple page to confirm basic functionality](http://yoheimuta.github.io/mobile-videoplayer.js)
 
+[Long scroll page to confirm autoplay and autopause](http://yoheimuta.github.io/mobile-videoplayer.js/scroll.html)
+
 ```awk
 # total image file size
 ls -l src/assets/tamagotchi_320x180_* | awk '{i+=$5}END{mb=(i/1000)/1000; printf "%.1fMB\n", mb}'
 2.7MB
-```
-
-[Long scroll page to confirm autoplay and autopause](http://yoheimuta.github.io/mobile-videoplayer.js/scroll.html)
-
-[High Quality page to confirm tradeoff between quality and loading time](http://yoheimuta.github.io/mobile-videoplayer.js/high_fps.html)
-
-```awk
-# total image file size
-ls -l src/assets/tamagotchi_f30_320x180_* | awk '{i+=$5}END{mb=(i/1000)/1000; printf "%.1fMB\n", mb}'
-7.1MB
 ```
 
 ### Usage
