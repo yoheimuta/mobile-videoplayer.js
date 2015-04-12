@@ -22,6 +22,18 @@ ls -l src/assets/tamagotchi_320x180_* | awk '{i+=$5}END{mb=(i/1000)/1000; printf
 2.7MB
 ```
 
+### Install
+
+Install with [Bower](http://bower.io/).
+
+```sh
+bower install mobile-videoplayer.js
+```
+
+Setup is done.
+
+Use `bower_components/mobile-videoplayer.js/dist/mvplayer.min.*.js`.
+
 ### Usage
 
 Create the container tag.
@@ -120,7 +132,7 @@ Also confirmed that time to complete loading and then start almost video is abou
 
 `mobile-videoplayer.js` use only one global variable `MVPlayer` to avoid polluting other global namespace.
 
-### Install
+### Development
 
 Install grunt and bower commands.
 
