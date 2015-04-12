@@ -1,6 +1,6 @@
 {
   "name": "mobile-videoplayer.js",
-  "version": "v0.0.1",
+  "version": "v0.0.2",
   "homepage": "https://github.com/yoheimuta/mobile-videoplayer.js",
   "description": "Web video player for mobile browser, especially for ios safari which is disabled to autoplay mp4",
   "main": [
