@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>mobile-videoplayer</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+  <script src="mvplayer.min.175e4cba.js"></script>
+</head>
+<body style="margin:0">
+  <!--表示コンテナ-->
+  <div id="video_container">
+      <div class="load-scene">
+          <img src="http://placehold.it/320x180">
+      </div>
+
+      <div
+          class="play-scene"
+          data-frame-width=320
+          data-frame-height=180
+          data-fps=12
+          data-did-start-url=""
+          data-did-resume-url=""
+          data-did-complete-url=""
+          data-first-quartile-url=""
+          data-midpoint-url=""
+          data-third-quartile-url=""
+          data-did-pause-url=""
+          style="display: none;"
+          >
+          <div
+              data-url="assets/tamagotchi_320x180_1.a9ac945e.jpg"
+              class="strip"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_320x180_2.d10717e2.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_320x180_3.a6a03603.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+          <div
+              data-url="assets/tamagotchi_320x180_4.0895f168.jpg"
+              class="strip"
+              style="display: none;"
+              >
+              <img>
+          </div>
+      </div>
+
+      <div class="replay-scene" style="display: none;">
+          <p>replay ?</p>
+      </div>
+
+      <div class="done-scene" style="display: none;">
+          <img src="http://placehold.it/320x180">
+      </div>
+  </div>
+  <!--スクリプトの実行-->
+  <script>
+    window.onload = function(){
+        MVPlayer.Controller.run(document.getElementById("video_container"), true);
+    };
+  </script>
+</body>
+</html>
+
